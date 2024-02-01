@@ -34,7 +34,7 @@ describe('CreateAccountController', () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle({ body: { ...mockedAccount.birthday } })
     expect(httpResponse).toEqual({
-      body: 'Bad request error',
+      body: 'Bad request',
       statusCode: 400
     })
   })
