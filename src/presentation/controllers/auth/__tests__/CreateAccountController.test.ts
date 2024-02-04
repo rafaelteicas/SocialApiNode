@@ -1,5 +1,8 @@
 import { type AccountModel } from '../../../../domain/models/AccountModel'
 import { type EmailValidatorUseCase } from '../../../../domain/usecases/EmailValidatorUseCase'
+import { BadRequestError } from '../../../helpers/errors/BadRequestError'
+import { MissingParamError } from '../../../helpers/errors/MissingParamError'
+import { ServerError } from '../../../helpers/errors/ServerError'
 import { DefaultResponses } from '../../../helpers/responses/DefaultResponses'
 import { type Controller } from '../../ControllerType'
 import { CreateAccountController } from '../CreateAccountController'
@@ -49,7 +52,7 @@ describe('CreateAccountController', () => {
   it('should return MissingParam if missing params', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle({ body: { ...mockedAccount.birthday } })
-    expect(httpResponse).toEqual(responses.missing('email'))
+    expect(httpResponse).toEqual(responses.error(new MissingParamError('email')))
   })
   it('should validate email', async () => {
     const { sut, emailValidatorStub } = makeSut()
@@ -57,7 +60,7 @@ describe('CreateAccountController', () => {
     const httpResponse = await sut.handle({
       body: { ...mockedAccount, email: 'fake_email' }
     })
-    expect(httpResponse).toEqual(responses.badRequest())
+    expect(httpResponse).toEqual(responses.error(new BadRequestError()))
   })
   it('should call repository with values and return created', async () => {
     const { sut } = makeSut()
@@ -65,5 +68,13 @@ describe('CreateAccountController', () => {
       body: { ...mockedAccount }
     })
     expect(httpResponse).toEqual(responses.created())
+  })
+  it('should throw if email validator throws', async () => {
+    const { sut, emailValidatorStub } = makeSut()
+    jest.spyOn(emailValidatorStub, 'validate').mockImplementationOnce(() => { throw new Error() })
+    const httpResponse = await sut.handle({
+      body: { ...mockedAccount }
+    })
+    expect(httpResponse).toEqual(responses.error(new ServerError()))
   })
 })
