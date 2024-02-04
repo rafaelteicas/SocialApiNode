@@ -1,8 +1,7 @@
 import { type Config } from 'jest'
 
 const config: Config = {
-  rootDir: '.',
-  collectCoverageFrom: ['src/presentation/controllers'],
+  collectCoverageFrom: ['src/{presentation, data}/**/*.{js,jsx,ts,tsx}'],
   coverageDirectory: 'coverage',
   transform: {
     '.+\\.ts$': 'ts-jest'

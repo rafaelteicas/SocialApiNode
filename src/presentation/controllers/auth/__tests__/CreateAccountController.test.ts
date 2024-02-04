@@ -1,5 +1,6 @@
 import { type AccountModel } from '../../../../domain/models/AccountModel'
 import { type EmailValidatorUseCase } from '../../../../domain/usecases/EmailValidatorUseCase'
+import { DefaultResponses } from '../../../helpers/responses/DefaultResponses'
 import { type Controller } from '../../ControllerType'
 import { CreateAccountController } from '../CreateAccountController'
 
@@ -42,14 +43,13 @@ function makeSut (): SutTypes {
   }
 }
 
+const responses = new DefaultResponses()
+
 describe('CreateAccountController', () => {
   it('should return BadRequest if missing params', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle({ body: { ...mockedAccount.birthday } })
-    expect(httpResponse).toEqual({
-      body: 'Bad request',
-      statusCode: 400
-    })
+    expect(httpResponse).toEqual(responses.badRequest())
   })
   it('should validate email', async () => {
     const { sut, emailValidatorStub } = makeSut()
@@ -57,9 +57,13 @@ describe('CreateAccountController', () => {
     const httpResponse = await sut.handle({
       body: { ...mockedAccount, email: 'fake_email' }
     })
-    expect(httpResponse).toEqual({
-      body: 'Bad request',
-      statusCode: 400
+    expect(httpResponse).toEqual(responses.badRequest())
+  })
+  it('should call repository with values and return created', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle({
+      body: { ...mockedAccount }
     })
+    expect(httpResponse).toEqual(responses.created())
   })
 })

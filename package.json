@@ -7,6 +7,7 @@
         "dev": "ts-node-dev ./src/main/server",
         "build": "npx tsc",
         "test": "jest --coverage",
+        "test:w": "jest --watchAll",
         "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
         "typeorm:run": "yarn typeorm migration:run -d ./src/infra/orm/AppDataSource.ts"
     },
