@@ -6,6 +6,9 @@ export class CreateAccountController implements Controller {
   constructor (private readonly emailValidator: EmailValidatorUseCase) {}
   async handle (request: HttpRequest): Promise<HttpResponse> {
     const responses = new DefaultResponses()
+    if (!request.body) {
+      return responses.badRequest()
+    }
     const requiredFields = ['email', 'password', 'birthday', 'username']
     for (const field of requiredFields) {
       if (!request.body[field]) {
