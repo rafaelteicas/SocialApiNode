@@ -1,11 +1,11 @@
 import 'reflect-metadata'
 import express from 'express'
-import { Routes } from '../routes'
 import { AppDataSource } from '../../infra/orm/AppDataSource'
+import { authRoutes } from '../routes/authRoutes'
 
 const app = express()
 
-app.use('/auth', Routes())
+authRoutes(app)
 
 AppDataSource.initialize()
   .then(() => {
