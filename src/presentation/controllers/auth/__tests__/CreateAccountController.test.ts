@@ -46,10 +46,10 @@ function makeSut (): SutTypes {
 const responses = new DefaultResponses()
 
 describe('CreateAccountController', () => {
-  it('should return BadRequest if missing params', async () => {
+  it('should return MissingParam if missing params', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle({ body: { ...mockedAccount.birthday } })
-    expect(httpResponse).toEqual(responses.badRequest())
+    expect(httpResponse).toEqual(responses.missing('email'))
   })
   it('should validate email', async () => {
     const { sut, emailValidatorStub } = makeSut()

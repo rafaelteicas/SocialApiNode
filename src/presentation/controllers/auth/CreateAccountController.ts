@@ -12,7 +12,7 @@ export class CreateAccountController implements Controller {
     const requiredFields = ['email', 'password', 'birthday', 'username']
     for (const field of requiredFields) {
       if (!request.body[field]) {
-        return responses.badRequest()
+        return responses.missing(field)
       }
     }
     const isValid = this.emailValidator.validate(request.body.email as string)
