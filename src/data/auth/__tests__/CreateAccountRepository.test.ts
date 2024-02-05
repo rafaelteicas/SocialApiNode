@@ -1,25 +1,41 @@
 import { type AccountModel } from '../../../domain/models/AccountModel'
-import { UserRepository } from '../../../infra/orm/repositories'
-import { CreateAccountRepository } from '../CreateAccountRepository'
+import { type CreateAccountRepository } from '../../repositories/CreateAccountRepository'
+import { CreateAccount } from '../CreateAccount'
 
 const mockedAccount: AccountModel = {
-  id: 1,
-  birthday: new Date(),
   email: 'any_mail@mail.com',
   name: 'any_name',
   password: '12345678',
+  birthday: new Date(),
   username: 'any_username'
+}
+
+interface SutTypes {
+  sut: CreateAccount
+  createAccountRepositoryStub: CreateAccountRepository
+}
+
+function makeCreateAccountRepositoryStub (): CreateAccountRepository {
+  class CreateAccountRepositoryStub implements CreateAccountRepository {
+    async save (data: AccountModel): Promise<void> {}
+  }
+  return new CreateAccountRepositoryStub()
+}
+
+function makeSut (): SutTypes {
+  const createAccountRepositoryStub = makeCreateAccountRepositoryStub()
+  const sut = new CreateAccount(createAccountRepositoryStub)
+  return {
+    sut,
+    createAccountRepositoryStub
+  }
 }
 
 describe('CreateAccountRepository', () => {
   it('should call repository.create with correct values', () => {
-    const mockedSave = jest.spyOn(UserRepository, 'save').mockResolvedValueOnce({
-      ...mockedAccount,
-      updatedAt: Date.now().toString(),
-      createdAt: Date.now().toString()
-    })
-    const sut = new CreateAccountRepository(UserRepository)
+    const { sut, createAccountRepositoryStub } = makeSut()
+    const repository = jest.spyOn(createAccountRepositoryStub, 'save')
     sut.create(mockedAccount)
-    expect(mockedSave).toHaveBeenCalledWith(mockedAccount)
+    expect(repository).toHaveBeenCalledWith(mockedAccount)
   })
 })

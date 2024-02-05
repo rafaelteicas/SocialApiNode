@@ -16,7 +16,6 @@ const data = '14/06/2002'
 const splitData = data.split('/')
 
 const mockedAccount: AccountModel = {
-  id: 1,
   birthday: new Date(
     parseInt(splitData[0]),
     parseInt(splitData[1]),
