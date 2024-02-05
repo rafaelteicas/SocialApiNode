@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "dev": "ts-node-dev ./src/main/server",
-        "build": "npx tsc",
+        "build-test": "npx tsc --noEmit",
         "test": "jest --coverage",
         "test:w": "jest --watchAll",
         "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
