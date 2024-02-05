@@ -69,6 +69,13 @@ describe('CreateAccountController', () => {
     })
     expect(httpResponse).toEqual(responses.created())
   })
+  it('should return badRequest if body is empty', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle({
+      body: ''
+    })
+    expect(httpResponse).toEqual(responses.error(new BadRequestError()))
+  })
   it('should throw if email validator throws', async () => {
     const { sut, emailValidatorStub } = makeSut()
     jest.spyOn(emailValidatorStub, 'validate').mockImplementationOnce(() => { throw new Error() })
