@@ -1,5 +1,6 @@
 import { type AccountModel } from '../../../domain/models/AccountModel'
 import { type CreateAccountRepository } from '../../repositories/CreateAccountRepository'
+import { type HashRepository } from '../../repositories/HashRepository'
 import { CreateAccount } from '../CreateAccount'
 
 const mockedAccount: AccountModel = {
@@ -10,32 +11,52 @@ const mockedAccount: AccountModel = {
   username: 'any_username'
 }
 
-interface SutTypes {
-  sut: CreateAccount
-  createAccountRepositoryStub: CreateAccountRepository
-}
-
 function makeCreateAccountRepositoryStub (): CreateAccountRepository {
   class CreateAccountRepositoryStub implements CreateAccountRepository {
+    async checkIfExists (email: string): Promise<boolean> {
+      return false
+    }
+
     async save (data: AccountModel): Promise<void> {}
   }
   return new CreateAccountRepositoryStub()
 }
 
+function makeHashPasswordStub (): HashRepository {
+  class HashPasswordStub implements HashRepository {
+    async hash (data: string): Promise<string> {
+      return 'hashed_password'
+    }
+  }
+  return new HashPasswordStub()
+}
+
+interface SutTypes {
+  sut: CreateAccount
+  createAccountRepositoryStub: CreateAccountRepository
+  hashPasswordStub: HashRepository
+}
+
 function makeSut (): SutTypes {
   const createAccountRepositoryStub = makeCreateAccountRepositoryStub()
-  const sut = new CreateAccount(createAccountRepositoryStub)
+  const hashPasswordStub = makeHashPasswordStub()
+  const sut = new CreateAccount(createAccountRepositoryStub, hashPasswordStub)
   return {
     sut,
-    createAccountRepositoryStub
+    createAccountRepositoryStub,
+    hashPasswordStub
   }
 }
 
 describe('CreateAccountRepository', () => {
-  it('should call repository.create with correct values', () => {
+  it('should call repository.create with correct values', async () => {
     const { sut, createAccountRepositoryStub } = makeSut()
-    const repository = jest.spyOn(createAccountRepositoryStub, 'save')
-    sut.create(mockedAccount)
-    expect(repository).toHaveBeenCalledWith(mockedAccount)
+    const saveAccount = jest.spyOn(createAccountRepositoryStub, 'save')
+    jest.spyOn(createAccountRepositoryStub, 'checkIfExists').mockResolvedValueOnce(false)
+    await sut.create(mockedAccount)
+    expect(saveAccount).toHaveBeenCalledWith({
+      ...mockedAccount,
+      password: 'hashed_password'
+    })
   })
 })
