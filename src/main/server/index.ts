@@ -1,19 +1,20 @@
 import 'reflect-metadata'
-import express from 'express'
+import express, { type Express } from 'express'
 import { AppDataSource } from '../../infra/orm/AppDataSource'
 import { authRoutes } from '../routes/authRoutes'
 
-const app = express()
-
-authRoutes(app)
+export async function setupApp (): Promise<Express> {
+  const app = express()
+  authRoutes(app)
+  return app
+}
 
 AppDataSource.initialize()
-  .then(() => {
-    console.log('APP IS RUNNING')
+  .then(async () => {
+    const app = await setupApp()
+    const PORT = 3000
+    app.listen(PORT, () => {
+      console.log('Server is running on', PORT)
+    })
   })
   .catch(console.log)
-
-const PORT = 3000
-app.listen(PORT, () => {
-  console.log('Server is running on', PORT)
-})
