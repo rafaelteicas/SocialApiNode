@@ -18,7 +18,7 @@ export class CreateAccountController implements Controller {
       if (!request.body) {
         return responses.error(new BadRequestError())
       }
-      const requiredFields = ['email', 'password', 'birthday', 'username']
+      const requiredFields = ['email', 'password', 'birthday', 'username', 'name']
       for (const field of requiredFields) {
         if (!request.body[field]) {
           return responses.error(new MissingParamError(field))

@@ -6,7 +6,7 @@ export class Users1706812619477 implements MigrationInterface {
     columns: [
       {
         name: 'id',
-        type: 'int',
+        type: 'varchar',
         isPrimary: true,
         generationStrategy: 'uuid',
         isNullable: false
@@ -18,7 +18,7 @@ export class Users1706812619477 implements MigrationInterface {
         isNullable: false
       },
       {
-        name: 'username',
+        name: 'birthday',
         type: 'varchar',
         isUnique: true,
         isNullable: false

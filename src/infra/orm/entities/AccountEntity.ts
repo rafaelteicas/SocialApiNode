@@ -2,9 +2,11 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 import { type AccountModel } from '../../../domain/models/AccountModel'
 import { IsEmail } from 'class-validator'
 
-@Entity()
+@Entity({
+  database: 'users'
+})
 export class AccountEntity implements AccountModel {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
     id: number
 
   @Column()
@@ -14,8 +16,8 @@ export class AccountEntity implements AccountModel {
   @Column()
     name: string
 
-  @Column('date')
-    birthday: Date
+  @Column()
+    birthday: string
 
   @Column()
     username: string
@@ -24,8 +26,8 @@ export class AccountEntity implements AccountModel {
     password: string
 
   @Column('timestamptz')
-    createdAt: string
+    createdAt: Date
 
   @Column('timestamptz')
-    updatedAt: string
+    updatedAt: Date
 }

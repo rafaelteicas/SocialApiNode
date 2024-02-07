@@ -7,7 +7,7 @@ const mockedAccount: AccountModel = {
   email: 'any_mail@mail.com',
   name: 'any_name',
   password: '12345678',
-  birthday: new Date(),
+  birthday: '01/01/2001',
   username: 'any_username'
 }
 

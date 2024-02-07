@@ -1,5 +1,6 @@
 import { join } from 'path'
 import { DataSource } from 'typeorm'
+import { AccountEntity } from './entities/AccountEntity'
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -9,5 +10,6 @@ export const AppDataSource = new DataSource({
   password: 'testpassword123',
   database: 'testdb',
   synchronize: true,
-  migrations: [join(__dirname, 'migrations/*.{ts,js}')]
+  migrations: [join(__dirname, 'migrations/*.{ts,js}')],
+  entities: [AccountEntity]
 })

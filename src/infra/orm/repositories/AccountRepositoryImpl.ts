@@ -18,6 +18,10 @@ export class AccountRepository implements CreateAccountRepository {
   }
 
   async save (data: AccountModel): Promise<void> {
-    await accountRepository.save(data)
+    await accountRepository.save({
+      ...data,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    })
   }
 }

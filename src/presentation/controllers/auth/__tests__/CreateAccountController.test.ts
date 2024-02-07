@@ -8,15 +8,8 @@ import { DefaultResponses } from '../../../helpers/responses/DefaultResponses'
 import { type Controller } from '../../ControllerType'
 import { CreateAccountController } from '../CreateAccountController'
 
-const data = '14/06/2002'
-const splitData = data.split('/')
-
 const mockedAccount: AccountModel = {
-  birthday: new Date(
-    parseInt(splitData[0]),
-    parseInt(splitData[1]),
-    parseInt(splitData[2])
-  ),
+  birthday: '01/01/2001',
   email: 'any_mail@mail.com',
   name: 'name',
   password: 'any_password',
@@ -62,9 +55,12 @@ function makeSut (): SutTypes {
 const responses = new DefaultResponses()
 
 describe('CreateAccountController', () => {
+  afterAll(() => {
+    jest.resetAllMocks()
+  })
   it('should return MissingParam if missing params', async () => {
     const { sut } = makeSut()
-    const httpResponse = await sut.handle({ body: { ...mockedAccount.birthday } })
+    const httpResponse = await sut.handle({ body: {} })
     expect(httpResponse).toEqual(responses.error(new MissingParamError('email')))
   })
   it('should validate email', async () => {
@@ -73,7 +69,7 @@ describe('CreateAccountController', () => {
       false
     )
     const httpResponse = await sut.handle({
-      body: { ...mockedAccount, email: 'fake_email' }
+      body: { ...mockedAccount, email: 'fake_email@mail.com' }
     })
     expect(httpResponse).toEqual(responses.error(new BadRequestError()))
   })
@@ -93,11 +89,7 @@ describe('CreateAccountController', () => {
   })
   it('should throw if EmailValidatorUseCase throws', async () => {
     const { sut, emailValidatorUseCaseStub } = makeSut()
-    jest.spyOn(emailValidatorUseCaseStub, 'validate').mockImplementationOnce(
-      () => {
-        throw new Error()
-      }
-    )
+    jest.spyOn(emailValidatorUseCaseStub, 'validate').mockImplementationOnce(() => { throw new Error() })
     const httpResponse = await sut.handle({
       body: { ...mockedAccount }
     })
