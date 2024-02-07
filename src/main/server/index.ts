@@ -5,6 +5,7 @@ import { authRoutes } from '../routes/authRoutes'
 
 export async function setupApp (): Promise<Express> {
   const app = express()
+  app.use(express.json())
   authRoutes(app)
   return app
 }
