@@ -1,8 +1,7 @@
 export interface AccountModel {
-  id: number
   email: string
   name: string
-  birthday: Date
+  birthday: string
   username: string
   password: string
 }

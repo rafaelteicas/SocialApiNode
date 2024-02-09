@@ -5,5 +5,5 @@ import { ExpressAdapter } from '../adapters/ExpressAdapter'
 
 export function authRoutes (route: Router): void {
   const routerAdapter = new RouterAdapter(new ExpressAdapter())
-  route.use('/auth/signup', routerAdapter.routes(makeSignUp()))
+  route.post('/auth/signup', routerAdapter.routes(makeSignUp()))
 }
