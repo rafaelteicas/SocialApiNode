@@ -1,4 +1,4 @@
-import { type AccountModel } from '../../../../domain/models/AccountModel'
+import { type CreateAccountModel } from '../../../../domain/models/AccountModel'
 import { type CreateAccountUseCase } from '../../../../domain/usecases/CreateAccountUseCase'
 import { type EmailValidatorUseCase } from '../../../../domain/usecases/EmailValidatorUseCase'
 import { BadRequestError } from '../../../helpers/errors/BadRequestError'
@@ -8,7 +8,7 @@ import { DefaultResponses } from '../../../helpers/responses/DefaultResponses'
 import { type Controller } from '../../ControllerType'
 import { CreateAccountController } from '../CreateAccountController'
 
-const mockedAccount: AccountModel = {
+const mockedAccount: CreateAccountModel = {
   birthday: '01/01/2001',
   email: 'any_mail@mail.com',
   name: 'name',
@@ -18,7 +18,7 @@ const mockedAccount: AccountModel = {
 
 function makeCreateAccountUseCase (): CreateAccountUseCase {
   class CreateAccountUseCaseStub implements CreateAccountUseCase {
-    async create (account: AccountModel): Promise<void> {}
+    async create (account: CreateAccountModel): Promise<void> {}
   }
   return new CreateAccountUseCaseStub()
 }

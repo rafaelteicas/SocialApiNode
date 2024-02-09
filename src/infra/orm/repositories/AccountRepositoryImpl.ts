@@ -1,5 +1,5 @@
 import { type CreateAccountRepository } from '../../../data/repositories/CreateAccountRepository'
-import { type AccountModel } from '../../../domain/models/AccountModel'
+import { type CreateAccountModel } from '../../../domain/models/AccountModel'
 import { AppDataSource } from '../AppDataSource'
 import { AccountEntity } from '../entities/AccountEntity'
 
@@ -17,7 +17,7 @@ export class AccountRepositoryImpl implements CreateAccountRepository {
     return true
   }
 
-  async save (data: AccountModel): Promise<void> {
+  async save (data: CreateAccountModel): Promise<void> {
     await accountRepository.save({
       ...data,
       createdAt: new Date(),
