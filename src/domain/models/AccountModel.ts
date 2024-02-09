@@ -19,3 +19,11 @@ export interface AccountModel {
   username: string
   password: string
 }
+
+export interface AuthenticateModel {
+  id: string
+  email: string
+  name: string
+  birthday: string
+  username: string
+}

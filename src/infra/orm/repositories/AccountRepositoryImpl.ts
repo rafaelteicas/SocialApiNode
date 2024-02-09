@@ -3,7 +3,7 @@ import { type CreateAccountModel } from '../../../domain/models/AccountModel'
 import { AppDataSource } from '../AppDataSource'
 import { AccountEntity } from '../entities/AccountEntity'
 
-const accountRepository = AppDataSource.getRepository(AccountEntity)
+export const accountRepository = AppDataSource.getRepository(AccountEntity)
 export class AccountRepositoryImpl implements CreateAccountRepository {
   async checkIfExists (email: string): Promise<boolean> {
     const account = await accountRepository.findOne({

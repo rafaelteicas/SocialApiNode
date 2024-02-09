@@ -48,7 +48,7 @@ function makeSut (): SutTypes {
   }
 }
 
-describe('CreateAccountRepository', () => {
+describe('CreateAccount', () => {
   it('should call repository.create with correct values', async () => {
     const { sut, createAccountRepositoryStub } = makeSut()
     const saveAccount = jest.spyOn(createAccountRepositoryStub, 'save')
