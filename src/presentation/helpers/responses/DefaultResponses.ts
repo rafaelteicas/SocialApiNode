@@ -14,4 +14,11 @@ export class DefaultResponses {
       statusCode: 201
     }
   }
+
+  success (body: any): HttpResponse {
+    return {
+      body,
+      statusCode: 201
+    }
+  }
 }
