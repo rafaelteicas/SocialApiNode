@@ -3,7 +3,7 @@ import { type AccountModel } from '../../../domain/models/AccountModel'
 import { IsEmail } from 'class-validator'
 
 @Entity({
-  database: 'users'
+  name: 'users'
 })
 export class AccountEntity implements AccountModel {
   @PrimaryGeneratedColumn('uuid')
