@@ -4,12 +4,14 @@ import {
 } from '../../domain/models/AccountModel'
 import { type AuthenticateUseCase } from '../../domain/usecases/AuthenticateUseCase'
 import { type AuthenticateRepository } from '../repositories/AuthenticateRepository'
+import { type TokenRepository } from '../repositories/TokenRepository'
 import { type VerifyHashRepository } from '../repositories/VerifyHashRepository'
 
 export class Authenticate implements AuthenticateUseCase {
   constructor (
     private readonly authenticateRepository: AuthenticateRepository,
-    private readonly verifyHashRepository: VerifyHashRepository
+    private readonly verifyHashRepository: VerifyHashRepository,
+    private readonly tokenRepository: TokenRepository
   ) {}
 
   async signIn (signInData: SignInDataModel): Promise<AuthenticateModel | null> {
@@ -20,13 +22,10 @@ export class Authenticate implements AuthenticateUseCase {
         account.password
       )
       if (comparedPassword) {
-        return {
-          id: account.id,
-          birthday: account.birthday,
-          email: account.email,
-          name: account.name,
-          username: account.username
-        }
+        const token = this.tokenRepository.generate({
+          ...account
+        })
+        return { token }
       }
     }
     return null

@@ -21,9 +21,5 @@ export interface AccountModel {
 }
 
 export interface AuthenticateModel {
-  id: string
-  email: string
-  name: string
-  birthday: string
-  username: string
+  token: string
 }
