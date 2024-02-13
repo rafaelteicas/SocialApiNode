@@ -1,4 +1,4 @@
-import { type SignInDataModel, type AccountModel } from '../../../../domain/models/AccountModel'
+import { type SignInModel } from '../../../../domain/models/auth/SignInModel'
 import { type AuthenticateUseCase } from '../../../../domain/usecases/AuthenticateUseCase'
 import { BadRequestError } from '../../../helpers/errors/BadRequestError'
 import { ServerError } from '../../../helpers/errors/ServerError'
@@ -8,15 +8,10 @@ import { AuthenticateController } from '../Authenticate'
 
 function makeAuthenticateControllerStub (): AuthenticateUseCase {
   class AuthenticateUseCaseStub implements AuthenticateUseCase {
-    async signIn (signInData: SignInDataModel): Promise<AccountModel> {
+    async signIn (signInData: SignInModel): Promise<{ token: string } | null> {
       return await new Promise(resolve => {
         resolve({
-          id: 'any_id',
-          email: 'any_mail@mail.com',
-          birthday: '01/01/2001',
-          name: 'any_name',
-          password: 'any_password',
-          username: 'any_username'
+          token: 'any_token'
         })
       })
     }

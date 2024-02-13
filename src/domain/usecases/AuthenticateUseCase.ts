@@ -1,5 +1,5 @@
-import { type AuthenticateModel, type SignInDataModel } from '../models/AccountModel'
+import { type SignInModel } from '../models/auth/SignInModel'
 
 export interface AuthenticateUseCase {
-  signIn: (signInData: SignInDataModel) => Promise<AuthenticateModel | null>
+  signIn: (signInData: SignInModel) => Promise<{ token: string } | null>
 }

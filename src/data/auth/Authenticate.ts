@@ -1,7 +1,4 @@
-import {
-  type SignInDataModel,
-  type AuthenticateModel
-} from '../../domain/models/AccountModel'
+import { type SignInModel } from '../../domain/models/auth/SignInModel'
 import { type AuthenticateUseCase } from '../../domain/usecases/AuthenticateUseCase'
 import { type AuthenticateRepository } from '../repositories/AuthenticateRepository'
 import { type TokenRepository } from '../repositories/TokenRepository'
@@ -14,7 +11,7 @@ export class Authenticate implements AuthenticateUseCase {
     private readonly tokenRepository: TokenRepository
   ) {}
 
-  async signIn (signInData: SignInDataModel): Promise<AuthenticateModel | null> {
+  async signIn (signInData: SignInModel): Promise<{ token: string } | null> {
     const account = await this.authenticateRepository.getAccountByEmail(signInData.email)
     if (account) {
       const comparedPassword = await this.verifyHashRepository.compare(

@@ -1,4 +1,4 @@
-import { type CreateAccountModel } from '../../../../domain/models/AccountModel'
+import { type CreateAccountModel } from '../../../../domain/models/auth/CreateAccountModel'
 import { type CreateAccountUseCase } from '../../../../domain/usecases/CreateAccountUseCase'
 import { type EmailValidatorUseCase } from '../../../../domain/usecases/EmailValidatorUseCase'
 import { BadRequestError } from '../../../helpers/errors/BadRequestError'

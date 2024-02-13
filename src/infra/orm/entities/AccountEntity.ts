@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
-import { type CreateAccountModel } from '../../../domain/models/AccountModel'
 import { IsEmail } from 'class-validator'
+import { type CreateAccountModel } from '../../../domain/models/auth/CreateAccountModel'
 
 @Entity({
   name: 'users'

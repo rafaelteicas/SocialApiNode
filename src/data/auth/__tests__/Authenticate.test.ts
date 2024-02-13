@@ -1,4 +1,4 @@
-import { type AccountModel } from '../../../domain/models/AccountModel'
+import { type AccountModel } from '../../../domain/models/auth/AccountModel'
 import { type AuthenticateRepository } from '../../repositories/AuthenticateRepository'
 import { type TokenRepository } from '../../repositories/TokenRepository'
 import { type VerifyHashRepository } from '../../repositories/VerifyHashRepository'

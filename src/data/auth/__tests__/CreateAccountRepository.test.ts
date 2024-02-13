@@ -1,4 +1,4 @@
-import { type CreateAccountModel } from '../../../domain/models/AccountModel'
+import { type CreateAccountModel } from '../../../domain/models/auth/CreateAccountModel'
 import { type CreateAccountRepository } from '../../repositories/CreateAccountRepository'
 import { type HashRepository } from '../../repositories/HashRepository'
 import { CreateAccount } from '../CreateAccount'
