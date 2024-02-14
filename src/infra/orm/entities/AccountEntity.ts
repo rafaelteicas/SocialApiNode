@@ -1,11 +1,11 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
-import { type AccountModel } from '../../../domain/models/AccountModel'
 import { IsEmail } from 'class-validator'
+import { type CreateAccountModel } from '../../../domain/models/auth/CreateAccountModel'
 
 @Entity({
   name: 'users'
 })
-export class AccountEntity implements AccountModel {
+export class AccountEntity implements CreateAccountModel {
   @PrimaryGeneratedColumn('uuid')
     id: number
 

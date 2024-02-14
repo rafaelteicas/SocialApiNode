@@ -1,9 +1,9 @@
-import { type AccountModel } from '../../../domain/models/AccountModel'
+import { type CreateAccountModel } from '../../../domain/models/auth/CreateAccountModel'
 import { type CreateAccountRepository } from '../../repositories/CreateAccountRepository'
 import { type HashRepository } from '../../repositories/HashRepository'
 import { CreateAccount } from '../CreateAccount'
 
-const mockedAccount: AccountModel = {
+const mockedAccount: CreateAccountModel = {
   email: 'any_mail@mail.com',
   name: 'any_name',
   password: '12345678',
@@ -17,7 +17,7 @@ function makeCreateAccountRepositoryStub (): CreateAccountRepository {
       return false
     }
 
-    async save (data: AccountModel): Promise<void> {}
+    async save (data: CreateAccountModel): Promise<void> {}
   }
   return new CreateAccountRepositoryStub()
 }
@@ -48,7 +48,7 @@ function makeSut (): SutTypes {
   }
 }
 
-describe('CreateAccountRepository', () => {
+describe('CreateAccount', () => {
   it('should call repository.create with correct values', async () => {
     const { sut, createAccountRepositoryStub } = makeSut()
     const saveAccount = jest.spyOn(createAccountRepositoryStub, 'save')

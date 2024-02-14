@@ -1,9 +1,9 @@
 import { type CreateAccountRepository } from '../../../data/repositories/CreateAccountRepository'
-import { type AccountModel } from '../../../domain/models/AccountModel'
+import { type CreateAccountModel } from '../../../domain/models/auth/CreateAccountModel'
 import { AppDataSource } from '../AppDataSource'
 import { AccountEntity } from '../entities/AccountEntity'
 
-const accountRepository = AppDataSource.getRepository(AccountEntity)
+export const accountRepository = AppDataSource.getRepository(AccountEntity)
 export class AccountRepositoryImpl implements CreateAccountRepository {
   async checkIfExists (email: string): Promise<boolean> {
     const account = await accountRepository.findOne({
@@ -17,7 +17,7 @@ export class AccountRepositoryImpl implements CreateAccountRepository {
     return true
   }
 
-  async save (data: AccountModel): Promise<void> {
+  async save (data: CreateAccountModel): Promise<void> {
     await accountRepository.save({
       ...data,
       createdAt: new Date(),

@@ -1,6 +1,6 @@
-import { type AccountModel } from '../../domain/models/AccountModel'
+import { type CreateAccountModel } from '../../domain/models/auth/CreateAccountModel'
 
 export interface CreateAccountRepository {
-  save: (data: AccountModel) => Promise<void>
+  save: (data: CreateAccountModel) => Promise<void>
   checkIfExists: (email: string) => Promise<boolean>
 }

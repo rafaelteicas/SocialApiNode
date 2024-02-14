@@ -9,7 +9,7 @@ export class ExpressAdapter {
         params: req.params
       }
       const response = await controller.handle(request)
-      res.status(response.statusCode).json({ message: response.body })
+      res.status(response.statusCode).json(response.body)
     }
   }
 }

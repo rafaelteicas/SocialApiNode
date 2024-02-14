@@ -8,7 +8,7 @@ import { type CreateAccountUseCase } from '../../../domain/usecases/CreateAccoun
 
 export class CreateAccountController implements Controller {
   constructor (
-    private readonly emailValidator: EmailValidatorUseCase,
+    private readonly emailValidatorUseCase: EmailValidatorUseCase,
     private readonly createAccountUseCase: CreateAccountUseCase
   ) { }
 
@@ -24,7 +24,9 @@ export class CreateAccountController implements Controller {
           return responses.error(new MissingParamError(field))
         }
       }
-      const isValid = this.emailValidator.validate(request.body.email as string)
+      const isValid = this.emailValidatorUseCase.validate(
+        request.body.email as string
+      )
       if (!isValid) { return responses.error(new BadRequestError()) }
       await this.createAccountUseCase.create(request.body)
       return responses.created()
