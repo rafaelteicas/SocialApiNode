@@ -1,5 +1,5 @@
 import { compare } from 'bcrypt'
-import { type VerifyHashRepository } from '../../data/repositories/VerifyHashRepository'
+import { type VerifyHashRepository } from '../../data/repositories/encrypt/VerifyHashRepository'
 
 export class VerifyHashRepositoryImpl implements VerifyHashRepository {
   async compare (data: string, hashedData: string): Promise<boolean> {

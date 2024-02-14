@@ -1,4 +1,4 @@
-import { type CreateAccountRepository } from '../../../data/repositories/CreateAccountRepository'
+import { type CreateAccountRepository } from '../../../data/repositories/auth/CreateAccountRepository'
 import { type CreateAccountModel } from '../../../domain/models/auth/CreateAccountModel'
 import { AppDataSource } from '../AppDataSource'
 import { AccountEntity } from '../entities/AccountEntity'

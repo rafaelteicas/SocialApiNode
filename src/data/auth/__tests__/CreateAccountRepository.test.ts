@@ -1,6 +1,6 @@
 import { type CreateAccountModel } from '../../../domain/models/auth/CreateAccountModel'
-import { type CreateAccountRepository } from '../../repositories/CreateAccountRepository'
-import { type HashRepository } from '../../repositories/HashRepository'
+import { type CreateAccountRepository } from '../../repositories/auth/CreateAccountRepository'
+import { type HashRepository } from '../../repositories/encrypt/HashRepository'
 import { CreateAccount } from '../CreateAccount'
 
 const mockedAccount: CreateAccountModel = {
