@@ -1,7 +1,7 @@
 import { type CreateAccountModel } from '../../domain/models/auth/CreateAccountModel'
-import { type CreateAccountUseCase } from '../../domain/usecases/CreateAccountUseCase'
-import { type CreateAccountRepository } from '../repositories/CreateAccountRepository'
-import { type HashRepository } from '../repositories/HashRepository'
+import { type CreateAccountUseCase } from '../../domain/usecases/auth/CreateAccountUseCase'
+import { type CreateAccountRepository } from '../repositories/auth/CreateAccountRepository'
+import { type HashRepository } from '../repositories/encrypt/HashRepository'
 
 export class CreateAccount implements CreateAccountUseCase {
   constructor (

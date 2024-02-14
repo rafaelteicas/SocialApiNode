@@ -1,10 +1,9 @@
-import { type EmailValidatorUseCase } from '../../../domain/usecases/EmailValidatorUseCase'
+import { type EmailValidatorUseCase } from '../../../domain/usecases/auth/EmailValidatorUseCase'
 import { BadRequestError } from '../../helpers/errors/BadRequestError'
 import { MissingParamError } from '../../helpers/errors/MissingParamError'
 import { DefaultResponses } from '../../helpers/responses/DefaultResponses'
 import { type HttpRequest, type Controller, type HttpResponse } from '../ControllerType'
-import { ServerError } from '../../helpers/errors/ServerError'
-import { type CreateAccountUseCase } from '../../../domain/usecases/CreateAccountUseCase'
+import { type CreateAccountUseCase } from '../../../domain/usecases/auth/CreateAccountUseCase'
 
 export class CreateAccountController implements Controller {
   constructor (
@@ -31,7 +30,7 @@ export class CreateAccountController implements Controller {
       await this.createAccountUseCase.create(request.body)
       return responses.created()
     } catch (er) {
-      return responses.error(new ServerError())
+      return responses.serverError()
     }
   }
 }

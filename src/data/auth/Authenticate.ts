@@ -1,8 +1,8 @@
 import { type SignInModel } from '../../domain/models/auth/SignInModel'
-import { type AuthenticateUseCase } from '../../domain/usecases/AuthenticateUseCase'
-import { type AuthenticateRepository } from '../repositories/AuthenticateRepository'
-import { type TokenRepository } from '../repositories/TokenRepository'
-import { type VerifyHashRepository } from '../repositories/VerifyHashRepository'
+import { type AuthenticateUseCase } from '../../domain/usecases/auth/AuthenticateUseCase'
+import { type AuthenticateRepository } from '../repositories/auth/AuthenticateRepository'
+import { type TokenRepository } from '../repositories/encrypt/TokenRepository'
+import { type VerifyHashRepository } from '../repositories/encrypt/VerifyHashRepository'
 
 export class Authenticate implements AuthenticateUseCase {
   constructor (

@@ -6,7 +6,7 @@ export class ExpressAdapter {
     return async (req: Request, res: Response) => {
       const request: HttpRequest = {
         body: req.body,
-        params: req.params
+        params: req.query
       }
       const response = await controller.handle(request)
       res.status(response.statusCode).json(response.body)

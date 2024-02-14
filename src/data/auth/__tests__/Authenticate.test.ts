@@ -1,7 +1,7 @@
 import { type AccountModel } from '../../../domain/models/auth/AccountModel'
-import { type AuthenticateRepository } from '../../repositories/AuthenticateRepository'
-import { type TokenRepository } from '../../repositories/TokenRepository'
-import { type VerifyHashRepository } from '../../repositories/VerifyHashRepository'
+import { type AuthenticateRepository } from '../../repositories/auth/AuthenticateRepository'
+import { type TokenRepository } from '../../repositories/encrypt/TokenRepository'
+import { type VerifyHashRepository } from '../../repositories/encrypt/VerifyHashRepository'
 import { Authenticate } from '../Authenticate'
 
 function makeTokenRepository (): TokenRepository {

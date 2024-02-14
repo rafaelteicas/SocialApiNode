@@ -1,10 +1,8 @@
 import { type SignInModel } from '../../../../domain/models/auth/SignInModel'
-import { type AuthenticateUseCase } from '../../../../domain/usecases/AuthenticateUseCase'
-import { BadRequestError } from '../../../helpers/errors/BadRequestError'
-import { ServerError } from '../../../helpers/errors/ServerError'
+import { type AuthenticateUseCase } from '../../../../domain/usecases/auth/AuthenticateUseCase'
 import { DefaultResponses } from '../../../helpers/responses/DefaultResponses'
 import { type Controller } from '../../ControllerType'
-import { AuthenticateController } from '../Authenticate'
+import { AuthenticateController } from '../AuthenticateController'
 
 function makeAuthenticateControllerStub (): AuthenticateUseCase {
   class AuthenticateUseCaseStub implements AuthenticateUseCase {
@@ -41,7 +39,7 @@ describe('AuthenticateController', () => {
     const response = await sut.handle({
       body: ''
     })
-    expect(response).toStrictEqual(responses.error(new BadRequestError()))
+    expect(response).toStrictEqual(responses.badRequest())
   })
   it('should return bad request if SignUpUseCase throws an error', async () => {
     const { sut, authenticateUseCaseStub } = makeSut()
@@ -49,6 +47,6 @@ describe('AuthenticateController', () => {
     const response = await sut.handle({
       body: {}
     })
-    expect(response).toStrictEqual(responses.error(new ServerError()))
+    expect(response).toStrictEqual(responses.serverError())
   })
 })

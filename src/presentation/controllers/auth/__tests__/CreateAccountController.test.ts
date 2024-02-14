@@ -1,9 +1,8 @@
 import { type CreateAccountModel } from '../../../../domain/models/auth/CreateAccountModel'
-import { type CreateAccountUseCase } from '../../../../domain/usecases/CreateAccountUseCase'
-import { type EmailValidatorUseCase } from '../../../../domain/usecases/EmailValidatorUseCase'
+import { type CreateAccountUseCase } from '../../../../domain/usecases/auth/CreateAccountUseCase'
+import { type EmailValidatorUseCase } from '../../../../domain/usecases/auth/EmailValidatorUseCase'
 import { BadRequestError } from '../../../helpers/errors/BadRequestError'
 import { MissingParamError } from '../../../helpers/errors/MissingParamError'
-import { ServerError } from '../../../helpers/errors/ServerError'
 import { DefaultResponses } from '../../../helpers/responses/DefaultResponses'
 import { type Controller } from '../../ControllerType'
 import { CreateAccountController } from '../CreateAccountController'
@@ -93,7 +92,7 @@ describe('CreateAccountController', () => {
     const httpResponse = await sut.handle({
       body: { ...mockedAccount }
     })
-    expect(httpResponse).toEqual(responses.error(new ServerError()))
+    expect(httpResponse).toEqual(responses.serverError())
   })
   it('should call CreateAccountUseCase with correct values', async () => {
     const { sut, createAccountUseCaseStub } = makeSut()

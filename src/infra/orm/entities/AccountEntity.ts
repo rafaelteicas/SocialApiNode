@@ -7,22 +7,22 @@ import { type CreateAccountModel } from '../../../domain/models/auth/CreateAccou
 })
 export class AccountEntity implements CreateAccountModel {
   @PrimaryGeneratedColumn('uuid')
-    id: number
+    id: string
 
-  @Column()
   @IsEmail()
+  @Column({ type: 'varchar' })
     email: string
 
-  @Column()
+  @Column({ type: 'varchar' })
     name: string
 
-  @Column()
+  @Column({ type: 'varchar' })
     birthday: string
 
-  @Column()
+  @Column({ type: 'varchar' })
     username: string
 
-  @Column()
+  @Column({ type: 'varchar' })
     password: string
 
   @Column('timestamptz')

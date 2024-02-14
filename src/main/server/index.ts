@@ -3,12 +3,14 @@ import express, { type Express } from 'express'
 import { AppDataSource } from '../../infra/orm/AppDataSource'
 import { authRoutes } from '../routes/authRoutes'
 import cors from 'cors'
+import { userRoutes } from '../routes/userRoutes'
 
 export async function setupApp (): Promise<Express> {
   const app = express()
   app.use(cors())
   app.use(express.json())
   authRoutes(app)
+  userRoutes(app)
   return app
 }
 

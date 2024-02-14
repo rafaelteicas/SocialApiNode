@@ -1,4 +1,4 @@
-import { type AuthenticateRepository } from '../../../data/repositories/AuthenticateRepository'
+import { type AuthenticateRepository } from '../../../data/repositories/auth/AuthenticateRepository'
 import { accountRepository } from './AccountRepositoryImpl'
 
 export class AuthenticateRepositoryImpl implements AuthenticateRepository {

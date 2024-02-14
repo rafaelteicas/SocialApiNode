@@ -1,5 +1,5 @@
 import bcrypt, { genSalt } from 'bcrypt'
-import { type HashRepository } from '../../data/repositories/HashRepository'
+import { type HashRepository } from '../../data/repositories/encrypt/HashRepository'
 
 export class EncrypterRepositoryImpl implements HashRepository {
   async hash (data: string): Promise<string> {
