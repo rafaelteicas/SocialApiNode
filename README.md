@@ -30,10 +30,10 @@ This API is created to use on X clone project.
 
 ### Use cases
 
-[X] - User can create account
-[X] - User can authenticate with credentials
-[X] - A JWT token will be returned
-[ ] - User profile will be returned with user id
+-   [x] -   User can create account
+-   [x] -   A JWT token will be returned
+-   [x] -   User can authenticate with credentials
+-   [x] -   User profile will be returned with user id
 
 ### Methodologies
 
