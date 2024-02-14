@@ -34,6 +34,7 @@ This API is created to use on X clone project.
 -   [x] -   A JWT token will be returned
 -   [x] -   User can authenticate with credentials
 -   [x] -   User profile will be returned with user id
+-   [ ] -   User can post a profile image
 
 ### Methodologies
 
